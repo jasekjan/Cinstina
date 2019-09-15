@@ -1,0 +1,36 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="10"
+    android:background="#dec2c2c2"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context="com.edu.cinstina.MainActivity">
+
+    <Button
+        android:id="@+id/btn_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:onClick="showCategories"
+        android:text="@string/btn_categories" />
+
+    <Button
+        android:id="@+id/btn_vocabularies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:onClick="showWords"
+        android:text="@string/btn_vocabularies" />
+
+    <Button
+        android:id="@+id/btn_flashcards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:onClick="startFlashcards"
+        android:text="@string/btn_flashcards" />
+</LinearLayout>
