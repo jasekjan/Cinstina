@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.edu.cinstina.db.WordsOpenHelper;
 public class SyncActivity extends AppCompatActivity {
     String fileUrl;
     Integer ACTIVITY_CHOOSE_FILE = 1;
+    static AsyncTask<String, Integer, Integer> df;
+    static AsyncTask<String, Integer, Integer> id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +40,9 @@ public class SyncActivity extends AppCompatActivity {
         try {
             if (isNetworkConnected()) {
 
-                new DownloadFile(this).execute(fileUrl);
+                df = new DownloadFile(this).execute(fileUrl);
 
-                new ImportData(this, this).execute();
+                id = new ImportData(this, this).execute();
 
                 Toast.makeText(getApplicationContext(), "Hotovo", Toast.LENGTH_SHORT).show();
             } else {

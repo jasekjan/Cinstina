@@ -115,7 +115,7 @@ public class PageFragment extends Fragment {
 
                 stav = woh.getStateById((int)Integer.valueOf(bundle.getString("id")));
 
-                if (stav <5 && stav > 0) {
+                if (stav <5 && stav >= 0) {
                     w.setState(stav +1);
                     w.setStateChangeDate(System.currentTimeMillis());
                 };
@@ -144,7 +144,7 @@ public class PageFragment extends Fragment {
 
                 stav = woh.getStateById((int)Integer.valueOf(bundle.getString("id")));
 
-                if (stav > 0) {
+                if (stav > 0 && stav <= 5) {
                     w.setState(stav -1);
                     w.setStateChangeDate(System.currentTimeMillis());
                 };

@@ -64,8 +64,8 @@ public class WordsListActivity extends Activity {
         final SimpleAdapter simpleAdapter = new SimpleAdapter(
                 this, list,
                 R.layout.row_layout,
-                new String[]{"myLang", "myReading", "myForeign", "id"},
-                new int[]{R.id.tv_myLang, R.id.tv_myReading, R.id.tv_myForeign, R.id.tv_hiddenId}
+                new String[]{"myLang", "myReading", "myForeign", "id", "state"},
+                new int[]{R.id.tv_myLang, R.id.tv_myReading, R.id.tv_myForeign, R.id.tv_hiddenId, R.id.tv_state}
         );
 
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -150,6 +150,7 @@ public class WordsListActivity extends Activity {
             temp.put("myReading", al.get(i).getMyReading());
             temp.put("myForeign", al.get(i).getMyForeign());
             temp.put("id", String.valueOf(al.get(i).getId()));
+            temp.put("state", String.valueOf(al.get(i).getState()));
             list.add(temp);
         }
     }

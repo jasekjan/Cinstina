@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.edu.cinstina.R;
 import com.edu.cinstina.db.Category;
@@ -65,10 +66,10 @@ public class ImportData extends AsyncTask<String, Integer, Integer> {
 
             br = new BufferedReader(new FileReader(file));
 
-
+            mTextViewResult = (TextView) activity.findViewById(R.id.tv_count);
             mTextView = (TextView) activity.findViewById(R.id.tv_load);
             mProgressBar = (ProgressBar) activity.findViewById(R.id.pb_load);
-            mTextViewResult = (TextView) activity.findViewById(R.id.tv_count);
+
 
             SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
 
@@ -98,11 +99,10 @@ public class ImportData extends AsyncTask<String, Integer, Integer> {
                     }
 
 
-                    Words words = new Words(myLang, myReading, myForeign, category, dateCreated, 0, System.currentTimeMillis());
+                    Words words = new Words(myLang, myReading, myForeign, category,  System.currentTimeMillis(), 0, System.currentTimeMillis());
                     findChar = db.findCharactersByChinese(myForeign);
                     if (findChar == null && myLang != null) {
                         if (findChar == null || !findChar.equals(words)) {
-                            dateCreated = System.currentTimeMillis();
                             db.addCharacters(words);
                             countInserted++;
                         }
@@ -130,7 +130,9 @@ public class ImportData extends AsyncTask<String, Integer, Integer> {
     @Override
     protected void onPostExecute(Integer i) {
         super.onPostExecute(i);
-
+        if (mTextViewResult == null) {
+            mTextViewResult = (TextView) activity.findViewById(R.id.tv_count);
+        }
         mTextViewResult.setText("Uloženo " + i + " nových slovíček");
     }
 }

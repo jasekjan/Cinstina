@@ -297,11 +297,11 @@ public class WordsOpenHelper extends SQLiteOpenHelper {
                 default: dny = 1;
             }
             if ((today - zmena)/(1000*60*60*24) < dny) {
-                stav = -1;
+                stav = 0;
             }
 
         } else {
-            stav = -1;
+            stav = 0;
         }
         db.close();
 

@@ -11,15 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tv_path"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_path"
-            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/et_path"
@@ -30,13 +24,6 @@
             android:importantForAutofill="no"
             android:inputType="text|textMultiLine|textImeMultiLine" />
 
-        <TextView
-            android:id="@+id/tv_speed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_speed"
-            android:textSize="18sp" />
-
         <EditText
             android:id="@+id/et_speed"
             android:layout_width="match_parent"
@@ -44,6 +31,20 @@
             android:ems="10"
             android:hint="@string/tv_speed"
             android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/tv_speed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_speed"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_path"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -53,12 +54,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:onClick="setDefault"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:srcCompat="@drawable/ic_sync_black_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
