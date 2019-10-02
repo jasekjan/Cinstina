@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dec2c2c2"
     android:gravity="top"
     android:orientation="vertical"
     android:weightSum="8">
@@ -16,7 +15,6 @@
         android:layout_marginEnd="20px"
         android:layout_marginBottom="10px"
         android:layout_weight="1"
-        android:background="@android:color/holo_orange_light"
         android:onClick="showCategoriesList"
         android:text="@string/categories_list" />
 
@@ -29,6 +27,5 @@
         android:layout_marginEnd="20px"
         android:layout_marginBottom="10px"
         android:layout_weight="1"
-        android:background="@android:color/holo_orange_light"
         android:text="@string/categories_words" />
 </LinearLayout>

@@ -18,55 +18,68 @@
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FlashcardActivity">
+        <activity android:name=".FlashcardActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
-        <activity android:name=".CategoriesActivity">
+        <activity android:name=".CategoriesActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
-        <activity android:name=".CategoriesListActivity">
+        <activity android:name=".CategoriesListActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CategoriesActivity"/>
-        </activity><activity android:name=".CategoryShowActivity">
+        </activity><activity android:name=".CategoryShowActivity"
+        android:theme="@style/Theme.Design.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CategoriesListActivity"/>
         </activity>
-        <activity android:name=".WordsListActivity">
+        <activity android:name=".WordsListActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.edu.cinstina.MainActivity" />
         </activity>
-        <activity android:name=".WordShowActivity">
+        <activity android:name=".WordShowActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.edu.cinstina.WordsListActivity" />
         </activity>
-        <activity android:name=".SwipeActivity">
+        <activity android:name=".SwipeActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.edu.cinstina.MainActivity" />
         </activity>
         <activity
             android:name=".SyncActivity"
-            android:label="@string/title_activity_sync"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Theme.Design.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/Theme.Design.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
 
     </application>
 </manifest>

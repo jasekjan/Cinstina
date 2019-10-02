@@ -1,54 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="10"
-    android:background="#dec2c2c2"
-    android:gravity="top"
     android:orientation="vertical"
-    android:weightSum="10"
-    tools:context="com.edu.cinstina.MainActivity">
+    android:weightSum="10">
 
-    <Button
-        android:id="@+id/btn_categories"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20px"
-        android:layout_marginTop="20px"
-        android:layout_marginEnd="20px"
-        android:layout_marginBottom="10px"
         android:layout_weight="2"
-        android:background="@android:color/holo_orange_light"
-        android:drawableStart="@drawable/ic_action_category"
-        android:onClick="showCategories"
-        android:text="@string/btn_categories" />
+        android:gravity="center|center_horizontal"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_vocabularies"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:text="@string/txt_zhongwen"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20px"
-        android:layout_marginTop="10px"
-        android:layout_marginEnd="20px"
-        android:layout_marginBottom="10px"
-        android:layout_weight="2"
-        android:background="@android:color/holo_orange_light"
-        android:drawableStart="@drawable/ic_action_vocabulary"
-        android:onClick="showWords"
-        android:text="@string/btn_vocabularies" />
+        android:layout_weight="8"
+        android:orientation="vertical"
+        android:weightSum="3">
 
-    <Button
-        android:id="@+id/btn_flashcards"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20px"
-        android:layout_marginTop="10px"
-        android:layout_marginEnd="20px"
-        android:layout_marginBottom="10px"
-        android:layout_weight="2"
-        android:background="@android:color/holo_orange_light"
-        android:drawableStart="@drawable/ic_action_flashcard"
-        android:onClick="startFlashcards"
-        android:text="@string/btn_flashcards" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_settings"
+                style="@android:style/Widget.DeviceDefault.Light.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:drawableStart="@android:drawable/ic_menu_preferences"
+                android:onClick="showSettings"
+                android:text="@string/btn_settings" />
+
+            <Button
+                android:id="@+id/btn_download"
+                style="@android:style/Widget.DeviceDefault.Light.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:drawableStart="@android:drawable/stat_sys_download_done"
+                android:onClick="syncWords"
+                android:text="@string/btn_download" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_categories"
+                style="@android:style/Widget.DeviceDefault.Light.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/ic_action_category"
+                android:onClick="showCategories"
+                android:text="@string/btn_categories" />
+
+            <Button
+                android:id="@+id/btn_vocabularies"
+                style="@android:style/Widget.DeviceDefault.Light.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/ic_action_vocabulary"
+                android:onClick="showWords"
+                android:text="@string/btn_vocabularies" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_flashcards"
+                style="@android:style/Widget.DeviceDefault.Light.Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:drawableStart="@drawable/ic_action_flashcard"
+                android:onClick="startFlashcards"
+                android:text="@string/btn_flashcards" />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

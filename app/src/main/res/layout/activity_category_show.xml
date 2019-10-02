@@ -76,14 +76,11 @@
             <Button
                 android:id="@+id/fab_detail_category_save"
                 android:layout_width="wrap_content"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:background="@color/colorPrimaryDark"
                 android:clickable="true"
                 android:onClick="saveCategory"
-                android:src="?attr/actionModeSelectAllDrawable"
                 android:text="@string/button_save"
-                android:textColor="@android:color/background_light"
                 android:textSize="18sp" />
         </FrameLayout>
 

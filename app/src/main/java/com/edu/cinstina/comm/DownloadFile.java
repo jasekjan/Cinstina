@@ -92,7 +92,7 @@ public class DownloadFile extends AsyncTask<String, Integer, Integer> {
     protected void onPostExecute(Integer i) {
 
         mProgressBar.setIndeterminate(false);
-        mTextView.setText("Staženo : 100 % (" +  i + " bytů)" );
+        mTextView.setText("Staženo : 100 %\n(" +  i + " bytů)" );
     }
 
     // After each task done

@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:isScrollContainer="true"
-    android:orientation="vertical"
-    android:scrollbars="vertical"
-    android:verticalScrollbarPosition="right">
-
-    <LinearLayout
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -159,15 +151,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="56dp"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:background="@color/colorPrimaryDark"
                 android:clickable="true"
                 android:onClick="saveWord"
-                android:src="?attr/actionModeSelectAllDrawable"
                 android:text="@string/button_save"
-                android:textColor="@android:color/background_light"
                 android:textSize="18sp" />
         </FrameLayout>
 
     </LinearLayout>
-
-</FrameLayout>
