@@ -1,11 +1,17 @@
 package com.edu.cinstina.comm;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.edu.cinstina.R;
 
@@ -29,6 +35,7 @@ public class DownloadFile extends AsyncTask<String, Integer, Integer> {
     private ProgressBar mProgressBar;
     private Activity activity;
     int total = 0;
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
     public DownloadFile(Activity activity) {
         this.activity = activity;
@@ -40,14 +47,19 @@ public class DownloadFile extends AsyncTask<String, Integer, Integer> {
     protected Integer doInBackground(String... fileUrl) {
         int count;
         try {
-           URL url = new URL(fileUrl[0]);
+            URL url = new URL(fileUrl[0]);
             URLConnection conection = url.openConnection();
             conection.connect();
 
-            File filepath = Environment.getExternalStorageDirectory();
-            File dir = new File(filepath.getAbsolutePath() + "/chineseData/");
-            dir.mkdirs();
-            File file = new File(dir, "listOfWords.csv");
+            //File filepath = Environment.getExternalStorageDirectory();
+            //File dir = new File(filepath.getAbsolutePath() + "/chineseData/");
+            //dir.mkdirs();
+            //File file = new File(dir, "listOfWords.csv");
+            ////File file = new File(activity.getFilesDir(), "listOfWords.csv");
+
+            //File file = File.createTempFile("list", "OfWords.csv", activity.getCacheDir());
+            File file = new File(activity.getCacheDir() + "/listOfWords.csv");
+
 
             // download the file
             InputStream input = new BufferedInputStream(url.openStream(),

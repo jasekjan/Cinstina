@@ -27,7 +27,7 @@ import java.util.Date;
  */
 
 public class ImportData extends AsyncTask<String, Integer, Integer> {
-    private static String FILEURI = "/chineseData/listOfWords.csv";
+    private static String FILEURI = "/listOfWords.csv";//"/chineseData/listOfWords.csv";
     private String path;
     private File file;
     private Context context;
@@ -46,7 +46,8 @@ public class ImportData extends AsyncTask<String, Integer, Integer> {
 
     public ImportData(Context context, Activity activity) {
         this.context = context;
-        this.file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + FILEURI);
+        //this.file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + FILEURI);
+        this.file = new File(context.getCacheDir(), FILEURI);
         this.activity = activity;
     }
 
