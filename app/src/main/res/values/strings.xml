@@ -131,4 +131,6 @@
     <string name="btn_download">Stáhnout</string>
     <string name="btn_download_long">Stáhnout slovíčka</string>
     <string name="txt_zhongwen">中文</string>
+    <string name="catword_added">Přiřazená</string>
+    <string name="catword_notadded">Nepřiřazená</string>
 </resources>

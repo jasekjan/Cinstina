@@ -93,6 +93,10 @@ public class CategoriesListActivity extends AppCompatActivity {
             case R.id.menu_item_del:
                 deleteCategory( Integer.valueOf(String.valueOf(itemInfo.get("id"))));
                 break;
+            case R.id.menu_tem_add_word :
+                Intent i = new Intent(this, CategoriesWordsActivity.class);
+                i.putExtra("category", String.valueOf(itemInfo.get("name")));
+                startActivity(i);
         }
 
         return true;

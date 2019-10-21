@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showCategories(View view) {
-        Intent i = new Intent(MainActivity.this, CategoriesActivity.class);
+       // Intent i = new Intent(MainActivity.this, CategoriesActivity.class);
+        Intent i = new Intent(MainActivity.this, CategoriesListActivity.class);
         startActivity(i);
     }
 }

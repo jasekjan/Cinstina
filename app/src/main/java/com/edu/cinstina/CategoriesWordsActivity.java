@@ -1,34 +1,50 @@
 package com.edu.cinstina;
 
 import android.os.Bundle;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.edu.cinstina.db.CategoryWordAdapter;
+import com.edu.cinstina.db.Words;
+import com.edu.cinstina.db.WordsOpenHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CategoriesWordsActivity extends AppCompatActivity {
-    ListView listView;
-    static final ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+    RecyclerView wordInCategory;
+
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private String category;
+    WordsOpenHelper db;
+    ArrayList<Words> al_in;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categories_list);
+        setContentView(R.layout.activity_categories_words);
 
-        listView = (ListView) findViewById(R.id.lv_categories_words);
+        category = getIntent().getStringExtra("category");
 
-        //db = new CategoryOpenHelper(this);
-        //categories = db.getCategories();
+        wordInCategory = (RecyclerView) findViewById(R.id.rv_category_words_in);
 
-        final SimpleAdapter simpleAdapter = new SimpleAdapter(
-                this, list,
-                R.layout.row_categories_layout,
-                new String[]{"name", "id"},
-                new int[]{R.id.tv_cat_name, R.id.tv_cat_id}
-        );
+        layoutManager = new LinearLayoutManager(this);
+        wordInCategory.setLayoutManager(layoutManager);
+
+        db = new WordsOpenHelper(this);
+        al_in = db.getWordsInCategoryState(category, true);
+
+        mAdapter = new CategoryWordAdapter(al_in);
+        wordInCategory.setAdapter(mAdapter);
+
+     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
+
 }

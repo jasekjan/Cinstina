@@ -18,4 +18,13 @@ public class CategoriesActivity extends AppCompatActivity {
         Intent i = new Intent(CategoriesActivity.this, CategoriesListActivity.class);
         startActivity(i);
     }
+
+    public void assignWordToCategory(View view) {
+        Intent i = new Intent(CategoriesActivity.this, CategoriesWordsActivity.class);
+        Bundle bundle = new Bundle();
+
+        //TODO
+        i.putExtra("category", "Město");
+        startActivity(i);
+    }
 }

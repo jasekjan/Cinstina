@@ -37,6 +37,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
+        <activity android:name=".CategoriesWordsActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".CategoriesActivity"/>
+        </activity>
         <activity android:name=".CategoriesListActivity"
             android:theme="@style/Theme.Design.NoActionBar">
             <meta-data

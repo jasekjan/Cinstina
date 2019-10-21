@@ -130,5 +130,4 @@ public class CategoryOpenHelper extends SQLiteOpenHelper {
         return category;
     }
 
-
 }

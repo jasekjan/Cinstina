@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -190,7 +191,7 @@ public class WordsOpenHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
-        if (poradi == "Náhodně") {
+        if (poradi.equals("Náhodně")) {
             Collections.shuffle(wordsArrayList);
         }
 
@@ -269,6 +270,65 @@ public class WordsOpenHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updateCategoryWord(long id, String category, boolean nechat) {
+        /** nechat: true - přidat slovíčko do kategorie, false - odstranit slovíčko z kategorie**/
+        Words w = findCharactersById(id);
+        String c = w.getCategory();
+        String cc;
+        cc = c;
+        if (!nechat) {
+            if (c.contains(category)) {
+                if (c.contains("|" + category)) {
+                    cc = c.replace("|" + category, "");
+                } else {
+                    if (c.contains(category + "|")) {
+                        cc = c.replace(category + "|", "");
+                    } else {
+                        cc = c.replace(category, "");
+                    }
+                }
+            }
+        } else {
+            cc = c + "|"+category;
+        }
+
+        String[] whereArgs = new String[1];
+        ContentValues cv = new ContentValues();
+        cv.put("category", cc);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(WORDS_TABLE_NAME, cv, "id=" + id, null);
+        db.close();
+    }
+
+
+
+    public ArrayList<Words> getWordsInCategoryState(String categoryName, boolean in) {
+        ArrayList<Words> array = new ArrayList<Words>();
+        String query;
+
+        query = "select myLang, id, case when category like '%"+categoryName+ "%' then '1' else '0' end as info from " + WORDS_TABLE_NAME + " order by info desc, myLang asc";
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(query, null);
+
+        if (c.moveToFirst()) {
+            do {
+                Words w = new Words();
+                w.setMyLang(c.getString(0));
+                w.setId(c.getInt(1));
+                w.setInfo(c.getString(2));
+                w.setCategory(categoryName);
+                array.add(w);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return array;
+    }
+
     public int getStateById(int id) {
         int stav, dny;
         Long zmena;
@@ -304,8 +364,6 @@ public class WordsOpenHelper extends SQLiteOpenHelper {
             stav = 0;
         }
         db.close();
-
-
 
         return stav;
     }

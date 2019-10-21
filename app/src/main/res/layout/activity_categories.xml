@@ -27,5 +27,6 @@
         android:layout_marginEnd="20px"
         android:layout_marginBottom="10px"
         android:layout_weight="1"
+        android:onClick="assignWordToCategory"
         android:text="@string/categories_words" />
 </LinearLayout>

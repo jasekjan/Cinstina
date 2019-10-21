@@ -6,16 +6,46 @@
     android:weightSum="8">
 
     <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="43dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-    <TextView
-        android:id="@+id/tv_category_word"
+        android:id="@+id/cb_in_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:checked="false"
+        android:clickable="false"
+        android:focusable="auto"
+        android:focusableInTouchMode="false" />
+
+    <TextView
+        android:id="@+id/tv_row_category_word"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="10sp"
         android:layout_weight="7"
-        android:text="TextView" />
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:gravity="start"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/tv_row_category_word_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tv_row_category_stav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tv_row_category_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
 
 </LinearLayout>

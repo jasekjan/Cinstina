@@ -16,6 +16,7 @@ public class Words implements WordsInterface {
     private Integer state; //values {0,1,2,3,4} where 0 means NEW and 4 means LEARNED
     private Long stateChangeDate;
     private String myLangAscii;
+    private String info;
 
     public Words(long id, String myLang, String myReading, String myForeign, String category, Long dateCreated, Integer state, Long stateChangedDate, String myLangAscii) {
         this.id = id;
@@ -121,6 +122,10 @@ public class Words implements WordsInterface {
     public void setStateChangeDate(Long stateChangeDate) {
         this.stateChangeDate = stateChangeDate;
     }
+
+    public String getInfo() {return this.info;}
+
+    public void setInfo(String info) {this.info = info;}
 
     @Override
     public String toString() {
