@@ -80,7 +80,7 @@ public class CategoryOpenHelper extends SQLiteOpenHelper {
 
     public ArrayList<String> getCategoriesAsText() {
         ArrayList<String> categories = new ArrayList<>();
-        String query = "select distinct name from "+ CATEGORY_TABLE_NAME +" order by name asc";
+        String query = "select distinct name from "+ CATEGORY_TABLE_NAME +" order by upper(name) asc";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
@@ -94,7 +94,7 @@ public class CategoryOpenHelper extends SQLiteOpenHelper {
 
     public ArrayList<Category> getCategories() {
         ArrayList<Category> categories = new ArrayList<>();
-        String query = "select distinct id, name from "+ CATEGORY_TABLE_NAME +" order by name asc";
+        String query = "select distinct id, name from "+ CATEGORY_TABLE_NAME +" order by upper(name) asc";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {

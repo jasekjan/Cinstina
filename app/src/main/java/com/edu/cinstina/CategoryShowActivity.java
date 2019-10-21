@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,16 +45,20 @@ public class CategoryShowActivity extends AppCompatActivity {
         EditText name = (EditText) findViewById(R.id.et_show_category_name);
         EditText id = (EditText) findViewById(R.id.et_show_category_id);
 
-        category.setName(String.valueOf(name.getText()));
-
-        db.addCategory(category);
-
-        if (getParent() == null) {
-            setResult(Activity.RESULT_OK, getIntent());
+        if (String.valueOf(name.getText()).length() < 4) {
+            Toast.makeText(this, "Název kategorie musí mít alespoň 4 znaky", Toast.LENGTH_SHORT).show();
         } else {
-            getParent().setResult(Activity.RESULT_OK, getIntent());
+            category.setName(String.valueOf(name.getText()));
+
+            db.addCategory(category);
+
+            if (getParent() == null) {
+                setResult(Activity.RESULT_OK, getIntent());
+            } else {
+                getParent().setResult(Activity.RESULT_OK, getIntent());
+            }
+            finish();
         }
-        finish();
     }
 
 }

@@ -13,7 +13,8 @@
         android:checked="false"
         android:clickable="false"
         android:focusable="auto"
-        android:focusableInTouchMode="false" />
+        android:focusableInTouchMode="false"
+        android:paddingEnd="15sp" />
 
     <TextView
         android:id="@+id/tv_row_category_word"

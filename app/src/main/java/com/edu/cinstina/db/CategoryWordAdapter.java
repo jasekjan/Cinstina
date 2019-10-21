@@ -22,6 +22,9 @@ public class CategoryWordAdapter extends RecyclerView.Adapter<CategoryWordAdapte
 
     public CategoryWordAdapter(ArrayList<Words> words) {
         this.words= words;
+        for (int i=0; i<words.size(); i++) {
+            itemStateArray.put(i, words.get(i).getInfo().equals("1"));
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -84,12 +87,12 @@ public class CategoryWordAdapter extends RecyclerView.Adapter<CategoryWordAdapte
         holder.tv_word_id.setText(String.valueOf(w.getId()));
         holder.tv_word_category.setText(w.getCategory());
 
-        if (w.getInfo().equals("1")) {
+        holder.bind(position);
+        /*if (w.getInfo().equals("1")) {
             itemStateArray.put(position, true);
         } else {
             itemStateArray.put(position, false);
-        }
-        holder.bind(position);
+        }*/
     }
 
     @Override

@@ -1,20 +1,28 @@
 package com.edu.cinstina;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.edu.cinstina.db.Category;
+import com.edu.cinstina.db.CategoryAdapter;
 import com.edu.cinstina.db.CategoryOpenHelper;
+import com.edu.cinstina.db.Words;
+import com.edu.cinstina.db.WordsOpenHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,12 +30,14 @@ import java.util.HashMap;
 public class CategoriesListActivity extends AppCompatActivity {
 
     static int CATEGORY_SAVED = 0;
-    static int CATEGORY_ADDED = 0;
     ListView listView;
     static final ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
     private EditText editText;
     private ArrayList<Category> categories;
     private CategoryOpenHelper db;
+    private WordsOpenHelper db_word;
+    private Parcelable state;
+    private CategoryAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,29 +50,31 @@ public class CategoriesListActivity extends AppCompatActivity {
         db = new CategoryOpenHelper(this);
         categories = db.getCategories();
 
-        final SimpleAdapter simpleAdapter = new SimpleAdapter(
-                this, list,
-                R.layout.row_categories_layout,
-                new String[]{"name", "id"},
-                new int[]{R.id.tv_cat_name, R.id.tv_cat_id}
-        );
+        adapter = new CategoryAdapter(this, categories);
 
-        /*      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                HashMap o = (HashMap) listView.getItemAtPosition(i);
-                Intent intent = new Intent(view.getContext(), CategoryShowActivity.class);
-                intent.putExtra("id", String.valueOf(o.get("id")));
-                startActivityForResult(intent, WORD_ADDED);
-            }
-        });
-*/
         editText = (EditText) findViewById(R.id.et_search);
 
-        populateList(categories);
-        listView.setAdapter(simpleAdapter);
+        //populateList(categories);
+        listView.setAdapter(adapter);
+        if (state != null) {
+            listView.onRestoreInstanceState(state);
+        }
 
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        state = listView.onSaveInstanceState();
+        outState.putParcelable("listState", state);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        state = savedInstanceState.getParcelable("listState");
+    }
+
 
     private void populateList(ArrayList<Category> al) {
         list.clear();
@@ -81,21 +93,23 @@ public class CategoriesListActivity extends AppCompatActivity {
 
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_item, menu);
+        inflater.inflate(R.menu.menu_item_catword, menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo ami = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
-        HashMap<String, String> itemInfo = new HashMap<>();
-        itemInfo = (HashMap)listView.getItemAtPosition(ami.position);
+       // HashMap<String, String> itemInfo = new HashMap<>();
+        Category itemInfo;
+        itemInfo = (Category) listView.getItemAtPosition(ami.position);
         switch (item.getItemId()) {
             case R.id.menu_item_del:
-                deleteCategory( Integer.valueOf(String.valueOf(itemInfo.get("id"))));
+                deleteCategory( itemInfo, this);
+                adapter.reloadData(db.getCategories());
                 break;
             case R.id.menu_tem_add_word :
                 Intent i = new Intent(this, CategoriesWordsActivity.class);
-                i.putExtra("category", String.valueOf(itemInfo.get("name")));
+                i.putExtra("category", String.valueOf(itemInfo.getName()));
                 startActivity(i);
         }
 
@@ -108,25 +122,26 @@ public class CategoriesListActivity extends AppCompatActivity {
         if (requestCode == CATEGORY_SAVED) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                startActivity(getIntent());
-            }
-        }
-
-        if (requestCode == CATEGORY_ADDED) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
-                finish();
-                startActivity(getIntent());
+                adapter.reloadData(db.getCategories());
             }
         }
     }
 
-    protected boolean deleteCategory(Integer id) {
+    protected boolean deleteCategory(Category c, Context context) {
         boolean ret;
+        ArrayList<Words> w;
         CategoryOpenHelper db = new CategoryOpenHelper(getApplicationContext());
-        ret = db.deleteById(id);
-        finish();
-        startActivity(getIntent());
+        state = listView.onSaveInstanceState();
+
+        db_word = new WordsOpenHelper(context) ;
+        w = db_word.getWordsInCategoryState(c.getName(), true);
+        if (w.size() == 0) {
+            ret = db.deleteById(c.getId());
+        } else {
+            Toast.makeText(context, "Kategorie je použitá u některého slovíčka, nejdřív zrušte vazbu!", Toast.LENGTH_SHORT).show();
+            ret = false;
+        }
+
         return ret;
     }
 
