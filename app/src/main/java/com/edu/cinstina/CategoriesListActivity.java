@@ -135,7 +135,13 @@ public class CategoriesListActivity extends AppCompatActivity {
 
         db_word = new WordsOpenHelper(context) ;
         w = db_word.getWordsInCategoryState(c.getName(), true);
-        if (w.size() == 0) {
+
+        int pocet = 0;
+        for (Words ww: w) {
+            if (ww.getInfo().equals("1")) {pocet++;}
+        }
+
+        if (pocet == 0) {
             ret = db.deleteById(c.getId());
         } else {
             Toast.makeText(context, "Kategorie je použitá u některého slovíčka, nejdřív zrušte vazbu!", Toast.LENGTH_SHORT).show();
