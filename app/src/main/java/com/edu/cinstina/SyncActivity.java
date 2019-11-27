@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
@@ -24,6 +25,8 @@ import com.edu.cinstina.comm.ImportData;
 import com.edu.cinstina.db.CategoryOpenHelper;
 import com.edu.cinstina.db.WordsOpenHelper;
 
+import java.io.File;
+
 public class SyncActivity extends AppCompatActivity {
     String fileUrl;
     Integer ACTIVITY_CHOOSE_FILE = 1;
@@ -34,8 +37,7 @@ public class SyncActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
+        if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -45,14 +47,14 @@ public class SyncActivity extends AppCompatActivity {
 
 
                 } else {
-                    Toast.makeText(this, "Bez přidělení oprávnění zápisu není možné synchronizovat slovíčka.", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "Bez přidělení oprávnění zápisu není možné synchronizovat slovíčka.", Toast.LENGTH_LONG).show();
                 }
                 return;
-            }
-
+            } else {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
             // other 'case' lines to check for other
             // permissions this app might request.
-        }
+            }
     }
 
     @Override
@@ -68,7 +70,7 @@ public class SyncActivity extends AppCompatActivity {
             if (isNetworkConnected()) {
 
                 // Here, thisActivity is the current activity
-                if (ContextCompat.checkSelfPermission(this,
+                /*if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
 
@@ -82,9 +84,9 @@ public class SyncActivity extends AppCompatActivity {
 
                 } else {
                     //download requested file
-                    df = new DownloadFile(this).execute(fileUrl);
-
-                }
+               */     df = new DownloadFile(this).execute(fileUrl);
+/*
+                }*/
 
             } else {
                 Toast.makeText(getApplicationContext(), "Nejste připojeni k internetu", Toast.LENGTH_LONG).show();
@@ -108,11 +110,12 @@ public class SyncActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) return;
         String path     = "";
-        if(requestCode == ACTIVITY_CHOOSE_FILE)
-        {
+        if(requestCode == ACTIVITY_CHOOSE_FILE) {
             Uri uri = data.getData();
             String FilePath = getRealPathFromURI(uri); // should the path be here in this string
             System.out.print("Cesta  = " + FilePath);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 

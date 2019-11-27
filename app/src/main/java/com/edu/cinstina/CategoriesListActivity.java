@@ -102,12 +102,12 @@ public class CategoriesListActivity extends AppCompatActivity {
        // HashMap<String, String> itemInfo = new HashMap<>();
         Category itemInfo;
         itemInfo = (Category) listView.getItemAtPosition(ami.position);
-        switch (item.getItemId()) {
-            case R.id.menu_item_del:
-                deleteCategory( itemInfo, this);
-                adapter.reloadData(db.getCategories());
-                break;
-            case R.id.menu_tem_add_word :
+        int id = item.getItemId();
+
+        if (id == R.id.menu_item_del) {
+            deleteCategory(itemInfo, this);
+            adapter.reloadData(db.getCategories());
+        } else if (id == R.id.menu_tem_add_word) {
                 Intent i = new Intent(this, CategoriesWordsActivity.class);
                 i.putExtra("category", String.valueOf(itemInfo.getName()));
                 startActivity(i);
@@ -135,7 +135,13 @@ public class CategoriesListActivity extends AppCompatActivity {
 
         db_word = new WordsOpenHelper(context) ;
         w = db_word.getWordsInCategoryState(c.getName(), true);
-        if (w.size() == 0) {
+
+        int pocet = 0;
+        for (Words ww: w) {
+            if (ww.getInfo().equals("1")) {pocet++;}
+        }
+
+        if (pocet == 0) {
             ret = db.deleteById(c.getId());
         } else {
             Toast.makeText(context, "Kategorie je použitá u některého slovíčka, nejdřív zrušte vazbu!", Toast.LENGTH_SHORT).show();

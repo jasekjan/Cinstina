@@ -65,9 +65,12 @@ public class FlashcardActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         ArrayList<String> poradi = new ArrayList<>();
-        poradi.add("Dle abecedy");
         poradi.add("Od nejnovějších");
-        poradi.add("Náhodně");
+        poradi.add("Abecedně");
+        //poradi.add("Abecedně po kategoriích");
+        poradi.add("Náhodně vše");
+        poradi.add("Náhodně 100");
+        poradi.add("Náhodně 50");
         Spinner spinnerPoradi = (Spinner)findViewById(R.id.spinner_poradi);
         ArrayAdapter adapterPoradi = new ArrayAdapter(this, R.layout.spinner_item, poradi);
         adapterPoradi.setDropDownViewResource(R.layout.spinner_item);

@@ -132,13 +132,13 @@ public class WordsListActivity extends Activity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_word_item_add:
-                //Intent intent = new Intent(listView.getContext(), CategoryShow.class);
-                //startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        if (id == R.id.menu_word_item_add) {
+            //Intent intent = new Intent(listView.getContext(), CategoryShow.class);
+            //startActivity(intent);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 
@@ -170,13 +170,14 @@ public class WordsListActivity extends Activity {
         listView = (ListView) findViewById(R.id.lv_words);
         int position;
 
+        int id = item.getItemId();
+
         AdapterView.AdapterContextMenuInfo ami = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         HashMap<String, String> itemInfo = new HashMap<>();
         itemInfo = (HashMap)listView.getItemAtPosition(ami.position);
-        switch (item.getItemId()) {
-            case R.id.menu_item_del:
-                deleteWord( Integer.valueOf(String.valueOf(itemInfo.get("id"))));
-                break;
+
+        if (id == R.id.menu_item_del) {
+            deleteWord( Integer.valueOf(String.valueOf(itemInfo.get("id"))));
         }
 
         return true;

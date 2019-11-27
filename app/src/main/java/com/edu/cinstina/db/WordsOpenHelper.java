@@ -152,8 +152,12 @@ public class WordsOpenHelper extends SQLiteOpenHelper {
 
         switch (poradi) {
             //case "Náhodně" : orderByString = " order by random()";break;
-            case "Dle abecedy" :orderByString = " order by category asc, myLang asc";break;
             case "Od nejnovějších" : orderByString = " order by dateCreated desc";break;
+            case "Abecedně" :orderByString = " order by replace(replace(lower(myLang), '(', ''),')','') asc";break;
+            //case "Abecedně po kategoriích" : orderByString = " order by lower(category) asc, replace(replace(lower(myLang), '(', ''),')','') asc";break;
+            case "Náhodně vše" : orderByString = " order by random() limit (select count() from words)"; break;
+            case "Náhodně 100" : orderByString = " order by random() limit 100"; break;
+            case "Náhodně 50" : orderByString = " order by random() limit 50"; break;
             default: orderByString = "";
         }
 
@@ -307,7 +311,7 @@ public class WordsOpenHelper extends SQLiteOpenHelper {
         ArrayList<Words> array = new ArrayList<Words>();
         String query;
 
-        query = "select myLang, id, case when category like '%"+categoryName+ "%' then '1' else '0' end as info from " + WORDS_TABLE_NAME + " order by info desc, myLang asc";
+        query = "select myLang, id, case when category like '%"+categoryName+ "%' then '1' else '0' end as info from " + WORDS_TABLE_NAME + " order by info desc, replace(replace(lower(myLang), '(', ''),')','') asc";
 
 
         SQLiteDatabase db = this.getReadableDatabase();

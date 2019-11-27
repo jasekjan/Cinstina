@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
 
 /**
  * Created by Honza on 22. 4. 2018.
@@ -58,7 +59,10 @@ public class DownloadFile extends AsyncTask<String, Integer, Integer> {
             ////File file = new File(activity.getFilesDir(), "listOfWords.csv");
 
             //File file = File.createTempFile("list", "OfWords.csv", activity.getCacheDir());
-            File file = new File(activity.getCacheDir() + "/listOfWords.csv");
+            File dir = activity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+            File out = new File(dir, "listOfWords.csv");
+
+            //File file = new File(activity.getCacheDir() + "/listOfWords.csv");
 
 
             // download the file
@@ -66,7 +70,7 @@ public class DownloadFile extends AsyncTask<String, Integer, Integer> {
                     8192);
 
             // Output stream
-            OutputStream output = new FileOutputStream(file);
+            OutputStream output = Files.newOutputStream(out.toPath());
 
             byte data[] = new byte[1024];
             String buffer = input.toString();

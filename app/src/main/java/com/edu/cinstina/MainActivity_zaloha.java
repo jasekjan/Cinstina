@@ -45,22 +45,20 @@ public class MainActivity_zaloha extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        int id = item.getItemId();
+
+
+        if (id == R.id.action_settings) {
             // action with ID action_refresh was selected
-            case R.id.action_settings:
-                showSettings(mContentView);
-                break;
-            case R.id.action_sync :
-                syncWords(mContentView);
-                break;
-            case R.id.action_search :
-                showWordsCategory(mContentView);
-                break;
-            case R.id.action_new :
-                addWord(mContentView);
-                break;
-            default:
-                break;
+            showSettings(mContentView);
+        } else if (id == R.id.action_sync) {
+            syncWords(mContentView);
+        } else if (id == R.id.action_search) {
+            showWordsCategory(mContentView);
+        } else if (id == R.id.action_new) {
+            addWord(mContentView);
+        } else {
+            return super.onOptionsItemSelected(item);
         }
 
         return true;
