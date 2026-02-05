@@ -52,13 +52,6 @@ public class DownloadFile extends AsyncTask<String, Integer, Integer> {
             URLConnection conection = url.openConnection();
             conection.connect();
 
-            //File filepath = Environment.getExternalStorageDirectory();
-            //File dir = new File(filepath.getAbsolutePath() + "/chineseData/");
-            //dir.mkdirs();
-            //File file = new File(dir, "listOfWords.csv");
-            ////File file = new File(activity.getFilesDir(), "listOfWords.csv");
-
-            //File file = File.createTempFile("list", "OfWords.csv", activity.getCacheDir());
             File dir = activity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
             File out = new File(dir, "listOfWords.csv");
 

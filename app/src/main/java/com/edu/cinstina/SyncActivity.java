@@ -68,26 +68,7 @@ public class SyncActivity extends AppCompatActivity {
     public void loadVocabulary(View view) {
         try {
             if (isNetworkConnected()) {
-
-                // Here, thisActivity is the current activity
-                /*if (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    // No explanation needed; request the permission
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-                        // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                        // app-defined int constant. The callback method gets the
-                        // result of the request.
-
-                } else {
-                    //download requested file
-               */     df = new DownloadFile(this).execute(fileUrl);
-/*
-                }*/
-
+                df = new DownloadFile(this).execute(fileUrl);
             } else {
                 Toast.makeText(getApplicationContext(), "Nejste připojeni k internetu", Toast.LENGTH_LONG).show();
             }
